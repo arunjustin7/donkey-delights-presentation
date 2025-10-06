@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donkey Delight's - Partnership Proposal for Naturals</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #6B4E8D 0%, #8E7AAB 50%, #A594C4 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .presentation-container {
+      max-width: 900px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      padding: 40px;
+      min-height: 600px;
+      position: relative;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .slide-title {
+      font-size: 2.5em;
+      color: #6B4E8D;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .slide-subtitle {
+      font-size: 1.2em;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .content-section {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 15px;
+      border-left: 5px solid #8E7AAB;
+    }
+
+    .content-section h3 {
+      color: #6B4E8D;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+
+    .benefits-list,
+    .applications-list,
+    .uses-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .benefits-list li,
+    .applications-list li,
+    .uses-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .benefits-list li:before,
+    .applications-list li:before,
+    .uses-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #8E7AAB;
+      font-weight: bold;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .nav-button {
+      background: linear-gradient(135deg, #6B4E8D 0%, #8E7AAB 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .nav-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-counter {
+      background: #8E7AAB;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #6B4E8D 0%, #8E7AAB 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .production-capacity {
+      display: grid;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .capacity-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid #8E7AAB;
+    }
+
+    .capacity-number {
+      font-size: 2em;
+      font-weight: bold;
+      color: #6B4E8D;
+    }
+
+    .product-forms {
+      display: grid;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .product-card {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid #8E7AAB;
+    }
+
+    .company-info {
+      background: linear-gradient(135deg, rgba(107, 78, 141, 0.1) 0%, rgba(142, 122, 171, 0.1) 100%);
+      padding: 30px;
+      border-radius: 15px;
+      margin: 20px 0;
+    }
+
+    .growth-metrics {
+      display: grid;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .metric-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 5px solid #8E7AAB;
+    }
+
+    .metric-title {
+      font-size: 1.1em;
+      color: #6B4E8D;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .naturals-brand {
+      background: linear-gradient(135deg, #6B4E8D 0%, #A594C4 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      margin: 20px 0;
+      border: 3px solid #8E7AAB;
+    }
+
+    .partnership-highlight {
+      background: linear-gradient(135deg, rgba(107, 78, 141, 0.15) 0%, rgba(165, 148, 196, 0.15) 100%);
+      border: 2px solid #8E7AAB;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 20px 0;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 640px) {
+      .product-forms {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .production-capacity {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+
+      .content-grid,
+      .growth-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-forms {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body style="padding-block: 4rem;">
+  <div class="presentation-container">
+    <img src="https://res.cloudinary.com/da3x1rnoy/image/upload/v1759299233/logo_mq5iga.png" alt="Donkey Delight Logo" width="150"
+      height="150" style="display: block; margin: 2rem auto 0;" onerror="this.style.display='none'" />
+    <!-- Slide 1: Title Slide -->
+    <div class="slide active">
+      <div class="slide-header">
+        <h1 class="slide-title">Donkey Delight Customer Deck</h1>
+        <p class="slide-subtitle">Premium Donkey Milk - Partnership Proposal for Naturals</p>
+      </div>
+      <div class="naturals-brand">
+        <h2>Partnering with India's Fastest Growing Salon Chain</h2>
+        <p>Bringing Naturals customers the ultimate luxury in natural beauty treatments</p>
+      </div>
+      <div class="company-info">
+        <h3 style="color: #6B4E8D; margin-bottom: 15px;">Who We Are</h3>
+        <p><strong>Donkey Delight's</strong> is a premier donkey milk production company specializing in high-quality,
+          ethically sourced donkey milk for cosmetic and therapeutic applications. With state-of-the-art facilities and
+          a commitment to sustainable farming practices, we deliver nature's most luxurious skincare ingredient to
+          premium beauty and wellness brands like Naturals.</p>
+        <p style="margin-top: 15px;">We combine traditional wisdom with modern technology to produce the finest quality
+          donkey milk, ensuring every drop meets Naturals' highest standards of purity and efficacy.</p>
+      </div>
+      <div class="highlight-box">
+        <h2>Elevating Naturals' Beauty Services Through Nature's Luxury</h2>
+        <p>Premium donkey milk products perfectly aligned with Naturals' commitment to excellence</p>
+      </div>
+      <div class="partnership-highlight">
+        <h3 style="color: #6B4E8D; margin-bottom: 15px;">Why Partner With Us?</h3>
+        <p>We specialize in premium donkey milk production with state-of-the-art facilities, ensuring the highest
+          quality standards that match Naturals' reputation for excellence. Our commitment to quality makes us the ideal
+          partner for Naturals' expanding luxury beauty and wellness services.</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: Who Are We -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Our Expertise & Capabilities</h1>
+        <p class="slide-subtitle">Your Trusted Donkey Milk Specialists</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-section">
+          <h3>Our Company</h3>
+          <ul class="benefits-list">
+            <li>Specialized donkey milk production facility</li>
+            <li>Strict hygiene and safety standards</li>
+            <li>High-quality, fresh milk supply for cosmetics</li>
+            <li>Sustainable and ethical farming practices</li>
+            <li>Advanced processing and preservation techniques</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h3>Our Expertise</h3>
+          <ul class="benefits-list">
+            <li>Premium grade donkey milk extraction</li>
+            <li>Special care in donkey milk processing</li>
+            <li>Quality assurance and testing</li>
+            <li>Regulatory compliance expertise</li>
+            <li>Scalable production capacity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <h3>Our Mission</h3>
+        <p>To provide the highest quality donkey milk products that enhance beauty, wellness, and skin health through
+          nature's most precious ingredients - perfectly aligned with Naturals' vision of premium beauty care.</p>
+      </div>
+    </div>
+
+    <!-- Slide 3: Applications in Cosmetics -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Applications in Naturals Services</h1>
+        <p class="slide-subtitle">Revolutionary Beauty Solutions for Your Customers</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-section">
+          <h3>Skin Care Applications</h3>
+          <ul class="applications-list">
+            <li>Anti-aging face creams and serums</li>
+            <li>Moisturizing body lotions</li>
+            <li>Gentle cleansing products</li>
+            <li>Exfoliating scrubs and masks</li>
+            <li>Eye creams for sensitive areas</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h3>Premium Service Lines</h3>
+          <ul class="applications-list">
+            <li>Luxury facial treatment products</li>
+            <li>Professional spa-grade formulations</li>
+            <li>Sensitive skin specialized products</li>
+            <li>Natural organic beauty lines</li>
+            <li>Bridal beauty enhancement treatments</li>
+          </ul>
+        </div>
+      </div>
+      <div class="naturals-brand">
+        <h3>Perfect for Naturals' Premium Services</h3>
+        <p>Rich in vitamins A, B1, B2, B6, D, C, and E, plus essential minerals and proteins that provide superior skin
+          nourishment - exactly what Naturals' discerning customers expect.</p>
+      </div>
+    </div>
+
+    <!-- Slide 4: Uses in Parlour -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Integration with Naturals' Service Menu</h1>
+        <p class="slide-subtitle">Enhancing Your Signature Services</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-section">
+          <h3>Facial Treatments</h3>
+          <ul class="uses-list">
+            <li>Signature donkey milk facial cleansing</li>
+            <li>Hydrating luxury face masks</li>
+            <li>Anti-aging treatment protocols</li>
+            <li>Sensitive skin soothing treatments</li>
+            <li>Brightening and toning facials</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h3>Body & Spa Services</h3>
+          <ul class="uses-list">
+            <li>Exclusive luxury milk baths</li>
+            <li>Full-body moisturizing treatments</li>
+            <li>Premium hand and foot care</li>
+            <li>Signature relaxing spa packages</li>
+            <li>Exclusive bridal beauty treatments</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <h3>Naturals' Competitive Advantage</h3>
+        <p>Offer exclusive donkey milk treatments that set Naturals apart as the premium destination for customers
+          seeking the finest in natural luxury beauty care - strengthening your position as India's leading salon chain.
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 5: Benefits -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Exceptional Benefits</h1>
+        <p class="slide-subtitle">Nature's Gift for Skin & Beauty</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-section">
+          <h3>Skin Health Benefits</h3>
+          <ul class="benefits-list">
+            <li>Deep moisturization and hydration</li>
+            <li>Anti-aging and wrinkle reduction</li>
+            <li>Gentle exfoliation and skin renewal</li>
+            <li>Improved skin elasticity and firmness</li>
+            <li>Natural sun protection properties</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h3>Therapeutic Properties</h3>
+          <ul class="benefits-list">
+            <li>Hypoallergenic for sensitive skin</li>
+            <li>Anti-inflammatory and healing</li>
+            <li>Natural antimicrobial protection</li>
+            <li>Skin barrier strengthening</li>
+            <li>pH balancing for optimal skin health</li>
+          </ul>
+        </div>
+      </div>
+      <div class="naturals-brand">
+        <h3>Scientific Advantage for Naturals</h3>
+        <p>Donkey milk contains the closest protein structure to human breast milk, making it exceptionally compatible
+          with human skin and highly effective in beauty applications - perfect for Naturals' reputation for
+          results-driven treatments.</p>
+      </div>
+    </div>
+
+    <!-- Slide 6: Production Capacity -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Production Capacity</h1>
+        <p class="slide-subtitle">Scalable Supply Solutions for Naturals Network</p>
+      </div>
+      <div class="production-capacity">
+        <div class="capacity-card">
+          <div class="capacity-number">30L</div>
+          <p>Daily Production Capacity</p>
+        </div>
+        <div class="capacity-card">
+          <div class="capacity-number">900L</div>
+          <p>Monthly Supply Capability</p>
+        </div>
+        <div class="capacity-card">
+          <div class="capacity-number">24/7</div>
+          <p>Quality Monitoring</p>
+        </div>
+      </div>
+      <div class="content-section">
+        <h3>Flexible Supply Options for Naturals</h3>
+        <ul class="benefits-list">
+          <li>Customizable quantities for all Naturals locations</li>
+          <li>Regular supply contracts with guaranteed availability</li>
+          <li>Emergency stock provisions for high-demand periods</li>
+          <li>Seasonal demand accommodation for bridal seasons</li>
+          <li>Volume discounts for Naturals' multi-location needs</li>
+          <li>Just-in-time delivery to individual salon locations</li>
+        </ul>
+      </div>
+      <div class="highlight-box">
+        <h3>Supporting Naturals' Growth</h3>
+        <p>Our scalable production facility can grow with Naturals' rapidly expanding network, ensuring consistent
+          supply as your donkey milk services gain popularity across all locations nationwide.</p>
+      </div>
+    </div>
+
+    <!-- Slide 7: Growth Benefits for Naturals -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">How We Accelerate Naturals' Growth</h1>
+        <p class="slide-subtitle">Strategic Partnership Benefits</p>
+      </div>
+      <div class="growth-metrics">
+        <div class="metric-card">
+          <div class="metric-title">Premium Service Differentiation</div>
+          <p>Offer exclusive donkey milk treatments that competitors cannot match, further strengthening Naturals'
+            position as India's premium salon leader.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Higher Revenue per Customer</div>
+          <p>Premium donkey milk services command 40-60% higher prices, directly increasing Naturals' average
+            transaction value across all locations.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Enhanced Customer Loyalty</div>
+          <p>Unique, effective treatments create memorable experiences that strengthen Naturals' customer retention and
+            word-of-mouth marketing.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Luxury Market Leadership</div>
+          <p>Position Naturals as the definitive leader in luxury skincare services, attracting high-end clientele
+            seeking premium, natural beauty solutions.</p>
+        </div>
+      </div>
+      <div class="naturals-brand">
+        <h3>Exclusive Partnership Advantages</h3>
+        <p>Dedicated supply agreements • Co-branded marketing support • Comprehensive staff training • New service
+          development collaboration • Quality assurance guarantee • National rollout support</p>
+      </div>
+    </div>
+
+    <!-- Slide 8: Product Benefits by Category -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Product Benefits by Category</h1>
+        <p class="slide-subtitle">Proven Results for Naturals' Customers</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-section">
+          <h3>Donkey Milk Soap</h3>
+          <p style="font-weight: bold; color: #6B4E8D; margin-bottom: 10px;">Immediate Benefits:</p>
+          <ul class="benefits-list">
+            <li>Gentle cleansing without stripping natural oils</li>
+            <li>Cleanses pores and moisturizes dry skin</li>
+            <li>Suitable for all skin types, including sensitive</li>
+            <li>Natural antibacterial properties</li>
+          </ul>
+          <p style="font-weight: bold; color: #6B4E8D; margin-bottom: 10px; margin-top: 15px;">Long-term Benefits:</p>
+          <ul class="benefits-list">
+            <li>Improved skin texture and elasticity</li>
+            <li>Reduced signs of aging</li>
+            <li>Enhanced skin barrier function</li>
+            <li>Consistent hydration levels</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h3>Donkey Milk Shampoo</h3>
+          <p style="font-weight: bold; color: #6B4E8D; margin-bottom: 10px;">Immediate Benefits:</p>
+          <ul class="benefits-list">
+            <li>Soft, manageable hair after first use</li>
+            <li>Gentle cleansing without damage</li>
+            <li>Natural shine enhancement</li>
+            <li>Reduced scalp irritation</li>
+          </ul>
+          <p style="font-weight: bold; color: #6B4E8D; margin-bottom: 10px; margin-top: 15px;">Long-term Benefits:</p>
+          <ul class="benefits-list">
+            <li>Restructures hair fiber for elasticity</li>
+            <li>Reduced hair breakage and split ends</li>
+            <li>Improved scalp health</li>
+            <li>Enhanced hair growth support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: More Product Benefits -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Product Benefits Continued</h1>
+        <p class="slide-subtitle">Complete Beauty Solutions</p>
+      </div>
+      <div class="content-section" style="max-width: 800px; margin: 0 auto 30px;">
+        <h3>Donkey Milk Moisturizer</h3>
+        <p style="font-weight: bold; color: #6B4E8D; margin-bottom: 10px;">Immediate Benefits:</p>
+        <ul class="benefits-list">
+          <li>Deep hydration without greasy feel</li>
+          <li>Quick absorption and skin compatibility</li>
+          <li>Silky, rejuvenated skin for dull complexions</li>
+          <li>Suitable for daily use</li>
+        </ul>
+        <p style="font-weight: bold; color: #6B4E8D; margin-bottom: 10px; margin-top: 15px;">Long-term Benefits:</p>
+        <ul class="benefits-list">
+          <li>Improved collagen production</li>
+          <li>Fights free radicals for overall tone improvement</li>
+          <li>Reduced fine lines and wrinkles</li>
+          <li>Enhanced skin firmness and elasticity</li>
+          <li>Improved overall skin health</li>
+        </ul>
+      </div>
+      <div class="naturals-brand">
+        <h3>Complete Product Line for Naturals</h3>
+        <div
+          style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; text-align: left;">
+          <div>
+            <p style="font-weight: bold; margin-bottom: 8px;">Face Care:</p>
+            <p style="font-size: 0.95em;">Cleansers, toners, serums, moisturizers, masks</p>
+          </div>
+          <div>
+            <p style="font-weight: bold; margin-bottom: 8px;">Hair Care:</p>
+            <p style="font-size: 0.95em;">Shampoos, conditioners, treatments, styling products</p>
+          </div>
+          <div>
+            <p style="font-weight: bold; margin-bottom: 8px;">Body Care:</p>
+            <p style="font-size: 0.95em;">Soaps, lotions, scrubs, massage oils</p>
+          </div>
+          <div>
+            <p style="font-weight: bold; margin-bottom: 8px;">Specialized Treatments:</p>
+            <p style="font-size: 0.95em;">Anti-aging, sensitive skin, repair formulations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Product Forms -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Versatile Product Forms</h1>
+        <p class="slide-subtitle">Customized Solutions for Naturals' Diverse Services</p>
+      </div>
+      <div class="product-forms">
+        <div class="product-card">
+          <h4>Fresh Milk</h4>
+          <p>Pure, raw donkey milk for immediate use in premium treatments</p>
+        </div>
+        <div class="product-card">
+          <h4>Cream Form</h4>
+          <p>Concentrated, rich cream for intensive moisturizing services</p>
+        </div>
+        <div class="product-card">
+          <h4>Soap Bars</h4>
+          <p>Gentle cleansing bars with natural moisturizing properties</p>
+        </div>
+        <div class="product-card">
+          <h4>Powder Form</h4>
+          <p>Shelf-stable powder for masks and custom formulations</p>
+        </div>
+      </div>
+      <div class="content-section">
+        <h3>Custom Formulation Services for Naturals</h3>
+        <ul class="benefits-list">
+          <li>Bespoke product development exclusively for Naturals</li>
+          <li>Private label manufacturing with Naturals branding</li>
+          <li>Specific concentration levels for different services</li>
+          <li>Added natural ingredients per Naturals' requirements</li>
+          <li>Custom packaging to match Naturals' brand aesthetic</li>
+          <li>Regulatory compliance support for nationwide operations</li>
+        </ul>
+      </div>
+      <div class="partnership-highlight">
+        <h3 style="color: #6B4E8D; margin-bottom: 15px;">Innovation Partnership</h3>
+        <p>We work exclusively with Naturals to develop new product forms and applications, ensuring your salon chain
+          stays at the forefront of beauty innovation and maintains its competitive edge in the premium market.</p>
+      </div>
+    </div>
+
+    <!-- Slide 11: Next Steps -->
+    <div class="slide">
+      <div class="slide-header">
+        <h1 class="slide-title">Partnership Proposal</h1>
+        <p class="slide-subtitle">Let's Transform Beauty Together</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-section">
+          <h3>Immediate Implementation</h3>
+          <ul class="benefits-list">
+            <li>Product samples and quality testing at select locations</li>
+            <li>Pilot program launch at flagship Naturals outlets</li>
+            <li>Comprehensive staff training and certification</li>
+            <li>Co-branded marketing material development</li>
+            <li>Supply chain setup for multi-location delivery</li>
+          </ul>
+        </div>
+        <div class="content-section">
+          <h3>Strategic Long-term Partnership</h3>
+          <ul class="benefits-list">
+            <li>Exclusive nationwide supplier agreement</li>
+            <li>Joint product development and innovation</li>
+            <li>Phased nationwide rollout across all locations</li>
+            <li>Continuous innovation and service development</li>
+            <li>Performance monitoring and optimization support</li>
+          </ul>
+        </div>
+      </div>
+      <div class="naturals-brand">
+        <h3>Ready to Elevate Naturals' Services?</h3>
+        <p>Contact us today to schedule a detailed discussion, exclusive product demonstration, and begin your journey
+          toward offering India's most luxurious, natural beauty treatments across all Naturals locations.</p>
+      </div>
+      <div class="company-info">
+        <h3 style="color: #6B4E8D; margin-bottom: 15px;">Contact Information</h3>
+        <p><strong>Email:</strong> donkeydelights25@gmail.com</p>
+        <p><strong>Phone:</strong> +91-9962725943</p>
+        <p><strong>Website:</strong> www.donkeydelight's.com</p>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(107, 78, 141, 0.1); border-radius: 10px;">
+          <p style="text-align: center; color: #6B4E8D; font-weight: bold;">Partnership Dedicated to Naturals' Continued
+            Success as India's Premier Salon Chain</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+      <button class="nav-button" id="prevBtn">← Previous</button>
+      <span class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">11</span>
+      </span>
+      <button class="nav-button" id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    document.getElementById('totalSlides').textContent = totalSlides;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+
+      document.getElementById('currentSlide').textContent = index + 1;
+      document.getElementById('prevBtn').disabled = index === 0;
+      document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+    }
+
+    function changeSlide(direction) {
+      const newIndex = currentSlideIndex + direction;
+      if (newIndex >= 0 && newIndex < totalSlides) {
+        currentSlideIndex = newIndex;
+        showSlide(currentSlideIndex);
+      }
+      window.scrollTo(0, 0);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    // Button click handlers for better mobile compatibility
+    document.getElementById('prevBtn').addEventListener('click', () => changeSlide(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => changeSlide(1));
+
+    // Touch support for mobile swipe
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.querySelector('.presentation-container').addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.querySelector('.presentation-container').addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) changeSlide(1);
+      if (touchEndX > touchStartX + 50) changeSlide(-1);
+    }
+
+    // Initialize
+    showSlide(0);
+  </script>
+</body>
+
+</html>
